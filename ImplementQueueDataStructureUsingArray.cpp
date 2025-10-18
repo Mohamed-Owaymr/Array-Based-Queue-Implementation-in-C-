@@ -99,56 +99,62 @@ public:
 // Test For My Queue
 int main() {
     MyQueue<int> q;
+    cout << "🚀 Starting Circular Queue Tests...\n\n";
 
-    cout << "=== Queue Test Start ===\n";
-
-    // Test 1: Check if the queue is empty initially
-    cout << "Test 1: isEmpty() -> " << (q.isEmpty() ? "true" : "false") << endl;
-
-    // Test 2: Try to dequeue from an empty queue -> should throw exception
-    try { 
-        q.dequeue(); 
-    } 
-    catch (const exception& e) { 
-        cout << "Test 2: dequeue empty -> Exception: " << e.what() << endl; 
-    }
-
-    // Test 3: Try to peek at the front element of an empty queue -> should throw exception
-    try { 
-        q.peek(); 
-    } 
-    catch (const exception& e) { 
-        cout << "Test 3: peek empty -> Exception: " << e.what() << endl; 
-    }
-
-    // Test 4: Enqueue a single element
+    // Test 1️⃣ : Enqueue elements normally
+    cout << "🧩 Test 1: Enqueue 3 elements\n";
     q.enqueue(10);
-    cout << "Test 4: enqueue(10) -> success\n";
-
-    // Check the front element after enqueue
-    cout << "Peek after enqueue: " << q.peek() << endl;
-
-    // Display the current queue contents
-    q.display();
-
-    // Test 5: Enqueue two more elements
     q.enqueue(20);
     q.enqueue(30);
-    cout << "Test 5: enqueue(20,30) -> success\n";
-
-    // Display the current queue contents
     q.display();
+    cout << "Front Element 👀: " << q.peek() << endl << endl;
 
-    // Test 6: Dequeue one element
+    // Test 2️⃣ : Dequeue one element
+    cout << "🧩 Test 2: Dequeue 1 element\n";
     q.dequeue();
-    cout << "Test 6: dequeue() -> success\n";
-
-    // Display the queue after dequeue
     q.display();
+    cout << "Front Element 👀: " << q.peek() << endl << endl;
 
-    // Test 7: Check the current size of the queue
-    cout << "Current size: " << q.getSize() << endl;
+    // Test 3️⃣ : Enqueue again (check circular behavior)
+    cout << "🌀 Test 3: Enqueue 2 more elements to test circular wrap\n";
+    q.enqueue(40);
+    q.enqueue(50);
+    q.display();
+    cout << "Queue Size 📏: " << q.getSize() << endl << endl;
 
-    cout << "=== Queue Test End ===\n";
+    // Test 4️⃣ : Dequeue all to make queue empty
+    cout << "🧩 Test 4: Dequeue all elements to test reset\n";
+    while (!q.isEmpty()) {
+        cout << "Dequeued 🔻: " << q.peek() << endl;
+        q.dequeue();
+    }
+    q.display();
+    cout << "Is Empty? 🤔 " << (q.isEmpty() ? "Yes ✅" : "No ❌") << endl << endl;
+
+    // Test 5️⃣ : Try Dequeue on empty queue (expect error)
+    cout << "⚠️ Test 5: Dequeue on empty queue (expect exception)\n";
+    try {
+        q.dequeue();
+    } catch (const exception &e) {
+        cout << "Caught Exception 💥: " << e.what() << endl << endl;
+    }
+
+    // Test 6️⃣ : Fill queue completely to test full condition
+    cout << "🧩 Test 6: Fill the queue to its capacity\n";
+    for (int i = 0; i < 10; ++i)  // using 10 to avoid long output
+        q.enqueue(i + 1);
+    q.display();
+    cout << "Queue Size 📏: " << q.getSize() << endl;
+    cout << "Is Full? 🏋️ " << (q.isFull() ? "Yes ✅" : "No ❌") << endl << endl;
+
+    // Test 7️⃣ : Enqueue when full (expect error)
+    cout << "⚠️ Test 7: Enqueue on full queue (expect exception)\n";
+    try {
+        q.enqueue(999);
+    } catch (const exception &e) {
+        cout << "Caught Exception 💥: " << e.what() << endl << endl;
+    }
+
+    cout << "🏁 All Tests Completed Successfully!\n";
     return 0;
 }
