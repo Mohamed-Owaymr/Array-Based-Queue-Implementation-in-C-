@@ -82,8 +82,8 @@ public:
             return;
         }
         cout << "Queue elements: ";
-        for (int i = frontIndex; i <= rearIndex; ++i) {
-            cout << array[i] << " ";
+        for (size_t i = 0; i < size; ++i) {
+            cout << array[(frontIndex + i) % capacity] << " ";
         }
         cout << endl;
     }
