@@ -12,6 +12,7 @@ private:
     size_t size;
     size_t capacity;
 
+
     // Reset indecies in Queue if Queue become empty.
     // complexity O(1) : constant time complexity.
     void resetIfEmpty() {
@@ -48,7 +49,7 @@ public:
         if(isFull()) {
             throw runtime_error("Error! Enqueue on full queue.");
         }
-        ++rearIndex;
+        rearIndex = rearIndex = (rearIndex + 1) % capacity;
         array[rearIndex] = element;
         ++size;
     }
@@ -59,7 +60,7 @@ public:
         if(isEmpty()) {
             throw runtime_error("Error! Dequeue on empty queue.");
         } 
-        ++frontIndex;
+        frontIndex = (frontIndex + 1) % capacity;
         --size;
         resetIfEmpty();      
     }
@@ -88,6 +89,10 @@ public:
     }
 
 };
+
+
+
+
 
 
 
