@@ -49,7 +49,7 @@ public:
         if(isFull()) {
             throw runtime_error("Error! Enqueue on full queue.");
         }
-        rearIndex = rearIndex = (rearIndex + 1) % capacity;
+        rearIndex = (rearIndex + 1) % capacity;
         array[rearIndex] = element;
         ++size;
     }
@@ -158,3 +158,4 @@ int main() {
     cout << "🏁 All Tests Completed Successfully!\n";
     return 0;
 }
+
